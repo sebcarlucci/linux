@@ -429,6 +429,7 @@ static const struct sof_process_types sof_process[] = {
 	{"CHAN_SELECTOR", SOF_PROCESS_CHAN_SELECTOR, SOF_COMP_SELECTOR},
 	{"MUX", SOF_PROCESS_MUX, SOF_COMP_MUX},
 	{"DEMUX", SOF_PROCESS_DEMUX, SOF_COMP_DEMUX},
+        {"AMP", SOF_PROCESS_AMP, SOF_COMP_AMP},
 };
 
 static enum sof_ipc_process_type find_process(const char *name)
@@ -1244,7 +1245,8 @@ static int sof_connect_dai_widget(struct snd_soc_component *scomp,
 	list_for_each_entry(rtd, &card->rtd_list, list) {
 		dev_vdbg(scomp->dev, "tplg: check widget: %s stream: %s dai stream: %s\n",
 			 w->name,  w->sname, rtd->dai_link->stream_name);
-
+		
+		dev_dbg(scomp->dev, "name: %s , stream_name: %s ", w->sname, rtd->dai_link->stream_name);
 		if (!w->sname || !rtd->dai_link->stream_name)
 			continue;
 
